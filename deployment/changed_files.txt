@@ -1,0 +1,56 @@
+# Changed/New Files for Production Upload
+# Copy these files maintaining folder structure
+
+# === NEW SERVICES ===
+app/Services/AIChatService.php
+app/Services/AIInboxResponderService.php
+app/Services/SmartNotificationService.php
+app/Services/RecommendationEngine.php
+app/Services/ViewTrackingService.php
+app/Services/EnhancedSearchService.php
+
+# === NEW/MODIFIED CONTROLLERS ===
+app/Http/Controllers/Admin/AIOperationsController.php
+app/Http/Controllers/Web/HomeController.php
+app/Http/Controllers/Web/ProductListController.php
+app/Http/Controllers/Web/ProductDetailsController.php
+app/Http/Controllers/Web/PowerCalculatorController.php
+
+# === NEW CONSOLE COMMANDS ===
+app/Console/Commands/ProcessAIInbox.php
+
+# === MIGRATIONS (for reference - use SQL instead) ===
+database/migrations/2026_02_07_add_ai_columns_to_chattings.php
+database/migrations/2026_02_07_create_ai_recommendation_tables.php
+
+# === ADMIN VIEWS ===
+resources/views/admin-views/ai-operations/dashboard.blade.php
+resources/views/admin-views/ai-operations/notifications.blade.php
+resources/views/admin-views/ai-operations/leads.blade.php
+
+# === THEME VIEWS (theme_aster) ===
+resources/themes/theme_aster/theme-views/home.blade.php
+resources/themes/theme_aster/theme-views/power-calculator.blade.php
+resources/themes/theme_aster/theme-views/product/details.blade.php
+resources/themes/theme_aster/theme-views/layouts/app.blade.php
+resources/themes/theme_aster/theme-views/layouts/partials/_settings-sidebar.blade.php
+resources/themes/theme_aster/theme-views/partials/_trust-strip.blade.php
+resources/themes/theme_aster/theme-views/partials/_flash-deals.blade.php
+resources/themes/theme_aster/theme-views/partials/_home-categories.blade.php
+resources/themes/theme_aster/theme-views/partials/_more-stores.blade.php
+resources/themes/theme_aster/theme-views/partials/_productSEOMetaContentData.blade.php
+
+# === DEFAULT THEME (SEO fixes) ===
+resources/themes/default/layouts/front-end/app.blade.php
+resources/themes/default/web-views/partials/_productSEOMetaContentData.blade.php
+
+# === PUBLIC ASSETS ===
+public/.htaccess
+public/assets/js/main.js
+
+# === ROUTES ===
+routes/admin.php
+routes/web.php
+
+# === DATABASE ===
+deployment/production_database.sql

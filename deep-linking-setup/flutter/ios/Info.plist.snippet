@@ -1,0 +1,39 @@
+<!-- =============================================================================
+     iOS INFO.PLIST ADDITIONS
+     =============================================================================
+
+     FILE LOCATION: ios/Runner/Info.plist
+
+     Add these entries to your existing Info.plist file
+     (inside the main <dict> tag)
+
+     ============================================================================= -->
+
+<!-- URL Types for custom URL scheme (optional but recommended) -->
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLName</key>
+        <string>com.yoola.app</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>yoola</string>
+        </array>
+    </dict>
+</array>
+
+<!-- Allow arbitrary loads for development (remove in production if not needed) -->
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+</dict>
+
+<!-- Query schemes (if you need to check if other apps are installed) -->
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>https</string>
+    <string>http</string>
+</array>

@@ -1,0 +1,30 @@
+@extends('theme-views.layouts.app')
+@section('title', 'Buy TVs in Uganda | Best TV Prices | Yoola')
+@section('content')
+<div class="bg-primary text-white py-4">
+<div class="container">
+<h1 class="fw-bold text-white">Buy TVs in Uganda</h1>
+<p class="text-white-50">Best prices. Free delivery Kampala. {{ $products->count() }} TVs available.</p>
+</div>
+</div>
+<div class="container py-4">
+<div class="row g-3">
+@forelse($products as $product)
+<div class="col-6 col-md-3">
+<div class="card h-100 shadow-sm">
+<a href="{{ route('product', $product->slug) }}">
+<img src="{{ getStorageImages(path: $product->thumbnail_full_url, type: 'product') }}" class="card-img-top p-2" alt="{{ $product->name }}" style="height:140px;object-fit:contain;">
+</a>
+<div class="card-body p-2">
+<h6 class="small mb-1">{{ Str::limit($product->name, 40) }}</h6>
+<p class="text-primary fw-bold mb-2">{{ webCurrencyConverter($product->unit_price) }}</p>
+<a href="https://wa.me/256780221421?text=Order: {{ urlencode($product->name) }}" class="btn btn-success btn-sm w-100">Order</a>
+</div>
+</div>
+</div>
+@empty
+<p>No TVs available.</p>
+@endforelse
+</div>
+</div>
+@endsection

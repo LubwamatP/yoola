@@ -1,0 +1,68 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+    RewriteEngine On
+    
+    # ====== YOOLA CANONICAL DOMAIN REDIRECTS ======
+    # Force all traffic to https://yoola.ug (no www, no mail subdomain)
+    
+    # Redirect mail.yoola.ug to yoola.ug
+    RewriteCond %{HTTP_HOST} ^mail\.yoola\.ug$ [NC]
+    RewriteRule ^(.*)$ https://yoola.ug/$1 [R=301,L]
+    
+    # Redirect www.yoola.ug to yoola.ug
+    RewriteCond %{HTTP_HOST} ^www\.yoola\.ug$ [NC]
+    RewriteRule ^(.*)$ https://yoola.ug/$1 [R=301,L]
+    
+    # Force HTTPS (but not for localhost)
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP_HOST} !^localhost$ [NC]
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+    # ====== END CANONICAL REDIRECTS ======
+    
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Hide a specific file
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# ====== YOOLA SEO OPTIMIZATIONS ======
+
+# Enable GZIP Compression (for LiteSpeed)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json
+    AddOutputFilterByType DEFLATE application/xml application/rss+xml
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# Browser Caching
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>

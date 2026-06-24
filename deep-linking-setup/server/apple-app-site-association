@@ -1,0 +1,25 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "TEAMID.com.yoola.app",
+        "paths": [
+          "/product/*",
+          "/products/*",
+          "/shop/*",
+          "/category/*",
+          "/brand/*",
+          "/flash-deals/*",
+          "/search/*",
+          "/seller/*"
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "TEAMID.com.yoola.app"
+    ]
+  }
+}

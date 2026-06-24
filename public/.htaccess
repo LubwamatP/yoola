@@ -1,0 +1,100 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+    RewriteEngine On
+
+# ====== YOOLA CANONICAL DOMAIN REDIRECTS ======
+# Redirect mail.yoola.ug to yoola.ug
+RewriteCond %{HTTP_HOST} ^mail\.yoola\.ug$ [NC]
+RewriteRule ^(.*)$ https://yoola.ug/$1 [R=301,L]
+
+# Redirect www.yoola.ug to yoola.ug  
+RewriteCond %{HTTP_HOST} ^www\.yoola\.ug$ [NC]
+RewriteRule ^(.*)$ https://yoola.ug/$1 [R=301,L]
+
+# Force HTTPS on yoola.ug
+RewriteCond %{HTTP_HOST} ^yoola\.ug$ [NC]
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://yoola.ug/$1 [R=301,L]
+# ====== END CANONICAL REDIRECTS ======
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Hide a specific file
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# ===== PERFORMANCE OPTIMIZATIONS =====
+
+# Brotli Compression (modern browsers)
+<IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css text/javascript
+    AddOutputFilterByType BROTLI_COMPRESS application/javascript application/x-javascript application/json
+    AddOutputFilterByType BROTLI_COMPRESS application/xml application/rss+xml image/svg+xml
+    AddOutputFilterByType BROTLI_COMPRESS font/ttf font/woff font/woff2
+</IfModule>
+
+# GZIP Compression (fallback)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json
+    AddOutputFilterByType DEFLATE application/xml application/xhtml+xml
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# Browser Caching
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/avif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# Cache-Control Headers
+<IfModule mod_headers.c>
+    # Static assets - cache 1 year
+    <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|webp|avif|js|css|swf|woff|woff2|ttf|eot)$">
+        Header set Cache-Control "max-age=31536000, public, immutable"
+    </FilesMatch>
+    # HTML - short cache, revalidate
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "max-age=3600, public, must-revalidate"
+    </FilesMatch>
+</IfModule>
+
+# ===== SECURITY HEADERS =====
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Content-Type-Options "nosniff"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ===== END PERFORMANCE OPTIMIZATIONS =====

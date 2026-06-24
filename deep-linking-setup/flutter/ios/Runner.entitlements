@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+    =============================================================================
+    iOS ENTITLEMENTS FILE
+    =============================================================================
+
+    FILE LOCATION: ios/Runner/Runner.entitlements
+
+    If this file doesn't exist, create it and add it to your Xcode project:
+    1. Open ios/Runner.xcworkspace in Xcode
+    2. Select Runner in the project navigator
+    3. Go to Signing & Capabilities tab
+    4. Click "+ Capability"
+    5. Add "Associated Domains"
+    6. Add: applinks:yoola.ug
+
+    =============================================================================
+-->
+<plist version="1.0">
+<dict>
+    <!-- Associated Domains for Universal Links -->
+    <key>com.apple.developer.associated-domains</key>
+    <array>
+        <string>applinks:yoola.ug</string>
+        <string>applinks:www.yoola.ug</string>
+    </array>
+</dict>
+</plist>

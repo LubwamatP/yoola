@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /login/admin/
+Disallow: /search
+Disallow: /search?
+Disallow: /customer/auth/
+Disallow: /business-page/
+
+# Block query parameters that cause issues
+Disallow: /*?order_by=
+Disallow: /*&order_by=
+
+Sitemap: https://yoola.ug/sitemap.xml
+Sitemap: https://yoola.ug/sitemap-index.xml
