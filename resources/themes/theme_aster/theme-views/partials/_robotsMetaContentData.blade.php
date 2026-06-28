@@ -43,19 +43,19 @@
     @if(isset($robotsMetaContentData) && isset($robotsMetaContentData?->meta_image_full_url) && $robotsMetaContentData?->meta_image_full_url['path'])
         <meta property="og:image" content="{{ $robotsMetaContentData?->meta_image_full_url['path'] }}">
         <meta name="twitter:image" content="{{ $robotsMetaContentData?->meta_image_full_url['path'] }}">
-        <meta name="twitter:card" content="{{ $robotsMetaContentData?->meta_image_full_url['path'] }}">
+        <meta name="twitter:card" content="summary_large_image">
     @elseif(isset($robotsMetaContentData) && isset($robotsMetaContentData?->image_full_url) && $robotsMetaContentData?->image_full_url['path'])
         <meta property="og:image" content="{{ $robotsMetaContentData?->image_full_url['path'] }}">
         <meta name="twitter:image" content="{{ $robotsMetaContentData?->image_full_url['path'] }}">
-        <meta name="twitter:card" content="{{ $robotsMetaContentData?->image_full_url['path'] }}">
+        <meta name="twitter:card" content="summary_large_image">
     @elseif($web_config['default_meta_content'])
         <meta property="og:image" content="{{ $web_config['default_meta_content']?->meta_image_full_url['path'] }}"/>
         <meta name="twitter:image" content="{{ $web_config['default_meta_content']?->meta_image_full_url['path'] }}"/>
-        <meta name="twitter:card" content="{{ $web_config['default_meta_content']?->meta_image_full_url['path'] }}"/>
+        <meta name="twitter:card" content="summary_large_image"/>
     @else
         <meta property="og:image" content="{{$web_config['web_logo']['path']}}"/>
         <meta name="twitter:image" content="{{$web_config['web_logo']['path']}}"/>
-        <meta name="twitter:card" content="{{$web_config['web_logo']['path']}}"/>
+        <meta name="twitter:card" content="summary_large_image"/>
     @endif
 
     @if(isset($robotsMetaContentData) && $robotsMetaContentData?->canonicals_url)

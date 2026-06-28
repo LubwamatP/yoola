@@ -1,3 +1,5 @@
 User-agent: *
 Disallow: /login/admin/
+Disallow: /vendor/
+Disallow: /vendor/auth/
 Sitemap: https://yoola.ug/sitemap.xml
