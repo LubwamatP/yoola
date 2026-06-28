@@ -41,6 +41,11 @@ class GenerateGoogleShoppingFeed extends Command
 
     public function handle()
     {
+        // Define constant required by 6valley's storage helpers
+        if (!defined('DOMAIN_POINTED_DIRECTORY')) {
+            define('DOMAIN_POINTED_DIRECTORY', 'public');
+        }
+
         $this->baseUrl = rtrim(config('app.url'), '/');
         $limit = (int) $this->option('limit');
 
