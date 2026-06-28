@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\GenerateSitemap::class,
+        Commands\\GenerateSitemap::class,
+        Commands\\GenerateGoogleShoppingFeed::class,
     ];
 
     /**
@@ -24,8 +25,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // Sitemap: daily regeneration + ping search engines
+        $schedule->command('sitemap:generate --ping')->dailyAt('03:30');
+
+        // Google Shopping Feed: daily regeneration at 4 AM
+        $schedule->command('shopping:feed')->dailyAt('04:00');
     }
 
     /**
